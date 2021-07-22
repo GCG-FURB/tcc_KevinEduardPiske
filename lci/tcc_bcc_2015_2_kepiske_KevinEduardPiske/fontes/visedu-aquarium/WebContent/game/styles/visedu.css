@@ -1,0 +1,405 @@
+html {
+	overflow: hidden;
+}
+html, body, .wrapper {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+html, body, div{
+	box-sizing: border-box;
+}
+
+.menu-tabs {
+	border: 0 !important;	
+} 
+
+.wrapper, .menu, .world {
+	display: inline-block;
+}
+
+.menu {
+	background: #DDDDDD;
+	width: 363px;
+	height: 100%;
+	float: left;
+}
+
+.world {
+	width: calc(100% - 363px);
+	height: 100%;
+}
+
+.menu-tabs {
+	height: 200px;	
+}
+
+.tab {
+	width: 100%;
+	padding: 20px;
+	height: auto;	
+}
+
+.pieces-canvas {
+	width: 100%;
+	height: calc(100% - 300px);
+	background: #F0F0F0;
+	padding: 10px 0 0 5px;
+	overflow: auto;
+}
+
+.pieces-tree {
+	width: 100%;
+	height: 300px;
+	resize: horizontal;
+}
+
+.textarea-canvas {
+	width: 100%;
+	height: 100px;
+	padding: 5px 5px 5px 5px;
+	overflow: auto;
+}
+
+.textarea {
+	width: 98%;
+	height: 88%;
+	resize: none;
+}
+
+.piece {
+	display: inline-block;
+	white-space: nowrap;
+}
+
+.piece > img {
+	display: inline-block;
+	vertical-align: middle;
+	width: 32px;
+	height: 32px;
+}
+
+
+.cell-matrix{
+	display: inline-block;
+	text-align: center;
+	width: 60px;
+}
+
+.prop-wrapper {
+	display: inline-block;
+}
+
+.property.points.polygon select {
+	margin-top: 5px;
+	width: 130px;	
+}
+	
+.property.texture .label {
+	vertical-align: super;
+}
+
+.property.texture select {
+	margin-top: 5px
+}
+
+.menu-tabs a, .menu-tabs input, .menu-tabs span, .property > *, .dialog * {
+	font: bold 12px "Arial";	
+}
+
+#source {
+	font: normal normal normal 13.3333330154419px/normal Arial;
+}
+
+.property {
+	padding: 2px 0 2px 0;	
+	position: relative;
+}
+
+.property > .label + * {
+	margin-left: 150px;
+}
+
+.property input[type="text"], .property input[type="number"] {
+	font-size: 12px;
+}	
+
+.property input[type="color"] {
+	width: 100px;
+}	
+
+.property .label {
+	display: inline-block;
+	position: absolute;
+	top: 5px;	
+}
+
+.prop-field.number {
+	width: 50px;
+	color: #00A0E6;
+}
+
+.piece > .txt {
+	font: bold 15px "Arial";	
+	padding: 0 20px 0 5px;
+	display: inline-block;
+	vertical-align: middle;
+	height: 32px;
+	display: inline-block;
+	line-height: 32px;
+	cursor: default;
+}
+
+.gap {
+	width: 10px;
+	height: 30px;
+	display: inline-block;
+}
+
+.piece.selected > .txt {
+	background: #A04B96;	
+}
+
+.selected.selected + .object-node {
+	border-left-color: #A04B96;
+}
+
+.piece < .selected){
+	background: red !important;	
+}
+.connector {
+	margin-top: 5px;
+	position: relative;
+}
+
+.connector > .piece {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.busy {
+	width: 100%;
+}
+
+.cross.connector > img {
+	content: url(../imgs/cross.png);
+	background: url(../imgs/cross.png);	
+}
+
+.aquarium.resting > img {
+	content: url(../imgs/cross-socket.png);
+	background: url(../imgs/cross-socket.png);
+}
+
+.aquarium.resting:hover > img{
+	content: url(../imgs/cross-socket-hover.png);
+	background: url(../imgs/cross-socket-hover.png);
+}
+
+.aquarium.resting > .txt {
+	background: #E67D32;
+}
+
+.aquarium.resting:hover > .txt {
+	background: #FAB478;
+}
+
+.aquarium.selected > img {
+	content: url(../imgs/cross-socket-selected.png);
+	background: url(../imgs/cross-socket-selected.png);
+}
+
+.aquarium.resting + .object-node {
+	border-left-color: #E67D32;
+}
+
+.aquarium.resting:hover + .object-node {
+	border-left-color: #FAB478;
+}
+
+.arrow.connector > img {
+	content: url(../imgs/arrow.png);
+	background: url(../imgs/arrow.png);	
+}
+
+.object.resting > img {
+	content: url(../imgs/arrow-socket.png);
+	background: url(../imgs/arrow-socket.png);
+}
+
+.object.resting:hover > img {
+	content: url(../imgs/arrow-socket-hover.png);
+	background: url(../imgs/arrow-socket-hover.png);
+}
+
+.object.resting > .txt {
+	background: #5AC85A;
+}
+
+.object.resting:hover > .txt {
+	background: #78F078;
+}
+
+.object-node {
+	border-left: 20px solid;
+	padding-left: 2px;
+}
+
+.dragged + .object-node {
+	display:none;
+	background: red;
+	z-index: 10;
+}
+
+.object.resting + .object-node {
+	border-left-color: #5AC85A;
+}
+
+.object.resting:hover + .object-node {
+	border-left-color: #78F078;
+}
+
+.object.selected > img {
+	content: url(../imgs/arrow-socket-selected.png);
+	background: url(../imgs/arrow-socket-selected.png);
+}
+	
+.component.resting > .txt {
+	background: #006EFF;
+}
+
+.square.connector > img {
+	content: url(../imgs/square.png);
+	background: url(../imgs/square.png);
+}
+
+.component.resting:hover > .txt {
+	background: #32A0FF;
+}
+	
+.component.resting > img {
+	content: url(../imgs/square-socket.png);
+	background: url(../imgs/square-socket.png);
+}
+
+.component.resting:hover > img {
+	content: url(../imgs/square-socket-hover.png);
+	background: url(../imgs/square-socket-hover.png);
+}
+
+.component.selected > img {
+	content: url(../imgs/square-socket-selected.png);
+	background: url(../imgs/square-socket-selected.png);
+}
+
+.diamond > img {	
+	content: url(../imgs/diamond.png);
+	background: url(../imgs/diamond.png);
+}
+
+.transform.resting > .txt {
+	background: #FA0000;
+}
+
+.transform.resting:hover > .txt {
+	background: #FF3C3C;
+}
+
+.transform.resting > img {
+	content: url(../imgs/diamond-socket.png);
+	background: url(../imgs/diamond-socket.png);
+}
+
+.transform.resting:hover > img {
+	content: url(../imgs/diamond-socket-hover.png);
+	background: url(../imgs/diamond-socket-hover.png);
+}
+
+.transform.selected > img {
+	content: url(../imgs/diamond-socket-selected.png);
+	background: url(../imgs/diamond-socket-selected.png);
+}
+
+.fish.resting > .txt {
+	background: #E6E619;
+}
+
+.fish.resting:hover > .txt{
+	background: #FAFA96;
+}
+
+.fish.resting > img {
+	content: url(../imgs/light-arrow-socket.png);
+	background: url(../imgs/light-arrow-socket.png);
+}
+
+.fish.resting:hover > img {
+	content: url(../imgs/light-arrow-socket-hover.png);
+	background: url(../imgs/light-arrow-socket-hover.png);
+}
+
+.fish.selected > img {
+	content: url(../imgs/light-arrow-socket-selected.png);
+	background: url(../imgs/light-arrow-socket-selected.png);
+}
+
+.renderer > .txt{
+	padding-left: 30px;
+}
+
+.renderer.resting > .txt {
+	background: #BBBBBB;
+}
+
+.renderer.resting:hover > .txt {
+	background: #DDDDDD;
+}
+
+.renderer + .object-node {
+	width: 100%;
+}
+
+.renderer.resting + .object-node {
+	border-left-color: #BBBBBB;
+}
+
+.renderer.resting:hover + .object-node {
+	border-left-color: #DDDDDD;
+}
+
+.trashCan {
+	position: absolute;
+	right: 20px;
+	bottom: 120px;
+	width: 40px;
+	height: 40px;
+	background-image: url(../imgs/trash.png);
+	background-size: contain;
+}
+
+.menu {
+	position: relative;
+}
+
+.source {
+	width: 99%;
+	height: 90%;
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+   float: none !important;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+     text-align: center !important; /* left/center/right */
+}
+
+.ajuda-tabs {
+	height: 100%;
+}
+.tab-ajuda {
+	overflow: auto;
+	height: 80%
+}

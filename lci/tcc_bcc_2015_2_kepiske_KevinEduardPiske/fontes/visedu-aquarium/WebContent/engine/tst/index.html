@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<script src='https://code.jquery.com/jquery-2.1.3.js'></script>
+<script src='https://code.jquery.com/ui/1.11.4/jquery-ui.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.js'></script>
+
+  <script src="../lib/prototype-1.6.0.2.js"></script>
+
+  <script src="../src/physic/box2d/common/b2Settings.js"></script>
+  <script src="../src/physic/box2d/common/math/b2Vec2.js"></script>
+  <script src="../src/physic/box2d/common/math/b2Mat22.js"></script>
+  <script src="../src/physic/box2d/common/math/b2Math.js"></script>
+  <script src="../src/physic/box2d/collision/b2AABB.js"></script>
+  <script src="../src/physic/box2d/collision/b2Bound.js"></script>
+  <script src="../src/physic/box2d/collision/b2BoundValues.js"></script>
+  <script src="../src/physic/box2d/collision/b2Pair.js"></script>
+  <script src="../src/physic/box2d/collision/b2PairCallback.js"></script>
+  <script src="../src/physic/box2d/collision/b2BufferedPair.js"></script>
+  <script src="../src/physic/box2d/collision/b2PairManager.js"></script>
+  <script src="../src/physic/box2d/collision/b2BroadPhase.js"></script>
+  <script src="../src/physic/box2d/collision/b2Collision.js"></script>
+  <script src="../src/physic/box2d/collision/Features.js"></script>
+  <script src="../src/physic/box2d/collision/b2ContactID.js"></script>
+  <script src="../src/physic/box2d/collision/b2ContactPoint.js"></script>
+  <script src="../src/physic/box2d/collision/b2Distance.js"></script>
+  <script src="../src/physic/box2d/collision/b2Manifold.js"></script>
+  <script src="../src/physic/box2d/collision/b2OBB.js"></script>
+  <script src="../src/physic/box2d/collision/b2Proxy.js"></script>
+  <script src="../src/physic/box2d/collision/ClipVertex.js"></script>
+  <script src="../src/physic/box2d/collision/shapes/b2Shape.js"></script>
+  <script src="../src/physic/box2d/collision/shapes/b2ShapeDef.js"></script>
+  <script src="../src/physic/box2d/collision/shapes/b2BoxDef.js"></script>
+  <script src="../src/physic/box2d/collision/shapes/b2CircleDef.js"></script>
+  <script src="../src/physic/box2d/collision/shapes/b2CircleShape.js"></script>
+  <script src="../src/physic/box2d/collision/shapes/b2MassData.js"></script>
+  <script src="../src/physic/box2d/collision/shapes/b2PolyDef.js"></script>
+  <script src="../src/physic/box2d/collision/shapes/b2PolyShape.js"></script>
+  <script src="../src/physic/box2d/dynamics/b2Body.js"></script>
+  <script src="../src/physic/box2d/dynamics/b2BodyDef.js"></script>
+  <script src="../src/physic/box2d/dynamics/b2CollisionFilter.js"></script>
+  <script src="../src/physic/box2d/dynamics/b2Island.js"></script>
+  <script src="../src/physic/box2d/dynamics/b2TimeStep.js"></script>
+  <script src="../src/physic/box2d/dynamics/contacts/b2ContactNode.js"></script>
+  <script src="../src/physic/box2d/dynamics/contacts/b2Contact.js"></script>
+  <script src="../src/physic/box2d/dynamics/contacts/b2ContactConstraint.js"></script>
+  <script src="../src/physic/box2d/dynamics/contacts/b2ContactConstraintPoint.js"></script>
+  <script src="../src/physic/box2d/dynamics/contacts/b2ContactRegister.js"></script>
+  <script src="../src/physic/box2d/dynamics/contacts/b2ContactSolver.js"></script>
+  <script src="../src/physic/box2d/dynamics/contacts/b2CircleContact.js"></script>
+  <script src="../src/physic/box2d/dynamics/contacts/b2Conservative.js"></script>
+  <script src="../src/physic/box2d/dynamics/contacts/b2NullContact.js"></script>
+  <script src="../src/physic/box2d/dynamics/contacts/b2PolyAndCircleContact.js"></script>
+  <script src="../src/physic/box2d/dynamics/contacts/b2PolyContact.js"></script>
+  <script src="../src/physic/box2d/dynamics/b2ContactManager.js"></script>
+  <script src="../src/physic/box2d/dynamics/b2World.js"></script>
+  <script src="../src/physic/box2d/dynamics/b2WorldListener.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2JointNode.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2Joint.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2JointDef.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2DistanceJoint.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2DistanceJointDef.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2Jacobian.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2GearJoint.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2GearJointDef.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2MouseJoint.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2MouseJointDef.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2PrismaticJoint.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2PrismaticJointDef.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2PulleyJoint.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2PulleyJointDef.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2RevoluteJoint.js"></script>
+  <script src="../src/physic/box2d/dynamics/joints/b2RevoluteJointDef.js"></script>
+
+  <script src="../src/utils/ArrayUtils.js"></script>   
+  <script src="../src/utils/ComponentUtils.js"></script>
+  <script src="../src/utils/JSUtils.js"></script>
+  <script src="../src/utils/StringUtils.js"></script>
+  <script src="../src/utils/ColorUtils.js"></script>
+  <script src="../src/utils/MathUtils.js"></script>
+  <script src="../src/collide/CollideInfo.js"></script>
+  <script src="../src/component/Component.js"></script>
+  <script src="../src/component/TransformationComponent.js"></script>
+  <script src="../src/component/TranslateComponent.js"></script> 
+  <script src="../src/component/RenderableComponent.js"></script>
+  <script src="../src/component/BoxRenderComponent.js"></script>
+  <script src="../src/component/CircleRenderComponent.js"></script>
+  <script src="../src/component/ImageRenderComponent.js"></script>
+  <script src="../src/component/PolygonRenderComponent.js"></script>
+  <script src="../src/component/RigidBodyComponent.js"></script>
+  <script src="../src/component/RotateComponent.js"></script>
+  <script src="../src/component/ScaleComponent.js"></script>
+  <script src="../src/component/TranslateComponent.js"></script>
+  <script src="../src/component/MoveCameraComponent.js"></script>
+  <script src="../src/component/CameraComponent.js"></script>
+  <script src="../src/component/FpsMeterComponent.js"></script>
+  <script src="../src/component/AnimationRenderComponent.js"></script>
+   <script src="../src/component/canvas/CanvasComponentFactory.js"></script>
+   <script src="../src/component/threeJS/ThreeJSComponentFactory.js"></script>
+   <script src="../src/component/canvas/CanvasTranslateComponent.js"></script>
+   <script src="../src/component/canvas/CanvasScaleComponent.js"></script>
+   <script src="../src/component/canvas/CanvasRotateComponent.js"></script> 
+   <script src="../src/component/threeJS/ThreeJSTranslateComponent.js"></script>
+   <script src="../src/component/threeJS/ThreeJSScaleComponent.js"></script>
+   <script src="../src/component/threeJS/ThreeJSRotateComponent.js"></script> 
+  <script src="../src/game/Asset.js"></script>
+  <script src="../src/game/AssetStore.js"></script>
+  <script src="../src/game/Camera.js"></script>
+  <script src="../src/game/Game.js"></script>
+  <script src="../src/game/Layer.js"></script>
+  <script src="../src/game/Scene.js"></script>
+  <script src="../src/geometric/Point.js"></script>
+  <script src="../src/geometric/Point2D.js"></script>
+  <script src="../src/geometric/Point3D.js"></script>
+  <script src="../src/gameobject/GameObject.js"></script>
+   <script src="../src/gameobject/canvas/CanvasObjectFactory.js"></script>
+   <script src="../src/gameobject/threeJS/ThreeJSObjectFactory.js"></script>
+  <script src="../src/gameobject/BoxObject.js"></script>
+  <script src="../src/gameobject/CircleObject.js"></script>
+  <script src="../src/gameobject/PolygonObject.js"></script>
+  <script src="../src/system/KeySystem.js"></script>
+  <script src="../src/system/LogicSystem.js"></script>
+  <script src="../src/system/MouseSystem.js"></script>
+  <script src="../src/system/RenderSystem.js"></script>
+  <script src="../src/api/APIHandler.js"></script>
+  <script src="../src/api/HTML5CanvasHandler.js"></script>
+  <script src="../src/api/ThreeJSHandler.js"></script>
+ 
+  <script type="text/javascript">
+  function MovePlayerComponent(){}
+  MovePlayerComponent.prototype = new Component();
+  MovePlayerComponent.prototype.onKeyDown = function(keyCode){
+    if(keyCode == 37){
+      this.owner.setLinearVelocityX(-150);
+      var anim = ComponentUtils.getComponent(this.owner, "ANIMATION_RENDER_COMPONENT");
+      if(anim.animation != 9){
+        anim.play("HORIZONTAL",9,0,8,-1,50);
+      }
+    }else if(keyCode == 39){
+      this.owner.setLinearVelocityX(150);
+      var anim = ComponentUtils.getComponent(this.owner, "ANIMATION_RENDER_COMPONENT");
+      if(anim.animation != 11){
+        anim.play("HORIZONTAL",11,0,8,-1,50);
+      }
+    }else if(keyCode == 38){
+      this.owner.setLinearVelocityY(-500);
+    }
+  }
+  MovePlayerComponent.prototype.onKeyUp = function(keyCode){
+    if(keyCode == 37){
+      this.owner.setLinearVelocityX(0);
+      ComponentUtils.getComponent(this.owner, "ANIMATION_RENDER_COMPONENT").play("HORIZONTAL",
+                                                                                 2,
+                                                                                 6,
+                                                                                 6,
+                                                                                 -1,
+                                                                                 150);
+    }else if(keyCode == 39){
+      this.owner.setLinearVelocityX(0);
+      ComponentUtils.getComponent(this.owner, "ANIMATION_RENDER_COMPONENT").play("HORIZONTAL",
+                                                                                 2,
+                                                                                 6,
+                                                                                 6,
+                                                                                 -1,
+                                                                                 150);
+    }else if(keyCode == 38){
+      this.owner.setLinearVelocityY(0);
+    }
+  }
+  
+  MovePlayerComponent.prototype.getSystems = function(){
+    var systems = new Array();
+    systems = ArrayUtils.addElement(systems, KeySystem);
+    return systems;
+  }
+  MovePlayerComponent.prototype.getTag = function(){
+    return "MOVE_PLAYER_COMPONENT";
+  }
+  function MoveTangramComponent(){}
+  MoveTangramComponent.prototype = new Component();
+  MoveTangramComponent.prototype.selectedPiece = null;
+  MoveTangramComponent.prototype.startX = 0;
+  MoveTangramComponent.prototype.startY = 0;
+  MoveTangramComponent.prototype.onMouseDown = function(x, y, wich){
+    var point = MouseSystem.getNormalizedCoordinate(x, y);
+    x = point.x;
+    y = point.y;
+
+    this.startX = x;
+    this.startY = y;
+
+    var selected = Game.scene.listLayers[1].queryGameObjects(x, y, 2, 2, 20);
+
+    this.selectedPiece = selected[0] || null;
+
+    if(this.selectedPiece == null){
+      var go = null;
+      if((x + y) % 2 == 0){
+        go = new BoxObject().initialize(x, y, 0, 40, 40, "white", "black");
+      }else{
+        go = new CircleObject().initialize(x, y, 0, 20, "white", "black");  
+      }  
+      ComponentUtils.addComponent(go, new RigidBodyComponent().initialize(0,1,false,false,0.2));
+      Game.scene.listLayers[1].addGameObject(go);
+      AssetStore.getAsset("BEEP_AUDIO").getAssetInstance().play();
+    }else{
+      if(ComponentUtils.getComponent(this.selectedPiece, "RIGID_BODY_COMPONENT").density == 0){
+        this.selectedPiece = null;
+      }
+      if(this.selectedPiece instanceof PolygonObject){
+        ComponentUtils.getComponent(this.selectedPiece, "POLYGON_RENDER_COMPONENT").strokeStyle = "white";
+      }else if(this.selectedPiece instanceof BoxObject){
+        if(ComponentUtils.getComponent(this.selectedPiece, "BOX_RENDER_COMPONENT") != null){
+          ComponentUtils.getComponent(this.selectedPiece, "BOX_RENDER_COMPONENT").strokeStyle = "white";
+        }
+      }else if(this.selectedPiece instanceof CircleObject){
+        ComponentUtils.getComponent(this.selectedPiece, "CIRCLE_RENDER_COMPONENT").strokeStyle = "white";
+      }
+    }
+  }
+  MoveTangramComponent.prototype.onMouseUp = function(x, y, wich){
+    this.startX = 0;
+    this.startY = 0;
+    if(this.selectedPiece != null){
+      if(this.selectedPiece instanceof PolygonObject){
+        ComponentUtils.getComponent(this.selectedPiece, "POLYGON_RENDER_COMPONENT").strokeStyle = "black";
+      }else if(this.selectedPiece instanceof BoxObject){
+        if(ComponentUtils.getComponent(this.selectedPiece, "BOX_RENDER_COMPONENT") != null){
+          ComponentUtils.getComponent(this.selectedPiece, "BOX_RENDER_COMPONENT").strokeStyle = "black";
+        }
+      }else if(this.selectedPiece instanceof CircleObject){
+        ComponentUtils.getComponent(this.selectedPiece, "CIRCLE_RENDER_COMPONENT").strokeStyle = "black";
+      }
+    }
+    this.selectedPiece = null;
+  }
+  MoveTangramComponent.prototype.onMouseMove = function(x, y, wich){
+    if(this.selectedPiece != null){
+      var point = MouseSystem.getNormalizedCoordinate(x, y);
+      x = point.x;
+      y = point.y;
+
+      //movimentação
+      var dx = (x - this.startX);
+      var dy = (y - this.startY);
+
+      this.selectedPiece.addMove(dx, dy);  
+
+      this.startX = x;
+      this.startY = y;
+    }
+  }
+  MoveTangramComponent.prototype.onKeyDown = function(keyCode){
+    if(keyCode == 109){
+      if(this.selectedPiece != null){
+        var rotate = ComponentUtils.getComponent(this.selectedPiece, "ROTATE_COMPONENT");
+        var angle = rotate.getAngle() + (1/60);
+        rotate.setRotate(angle);
+      }
+    }else if(keyCode == 107){
+      if(this.selectedPiece != null){
+        var rotate = ComponentUtils.getComponent(this.selectedPiece, "ROTATE_COMPONENT");
+        var angle = rotate.getAngle() - (1/60);
+        rotate.setRotate(angle);
+      }
+    }else if(keyCode == 71){
+      if(Game.scene.listLayers[1].gravity == 0){
+        Game.scene.listLayers[1].setGravity(1000);  
+      }else{
+        Game.scene.listLayers[1].setGravity(0);  
+      }
+    }
+  }
+  MoveTangramComponent.prototype.getSystems = function(){
+    var systems = new Array();
+    systems = ArrayUtils.addElement(systems, KeySystem);
+    systems = ArrayUtils.addElement(systems, MouseSystem);
+    return systems;
+  }
+  MoveTangramComponent.prototype.getTag = function(){
+    return "MOVE_TANGRAM_COMPONENT";
+  }
+
+  function buildGame(){
+    Game.loadAPI();
+    AssetStore.addAsset(new Asset().initialize("SPRITE_PLAYER", "./sprite.png", "IMAGE"));
+    AssetStore.addAsset(new Asset().initialize("GROUND_IMAGE", "./block.png", "IMAGE"));
+    AssetStore.addAsset(new Asset().initialize("BACKGROUND_IMAGE", "./background.jpg", "IMAGE"));
+    AssetStore.addAsset(new Asset().initialize("BEEP_AUDIO", "./beep-02.wav", "AUDIO"));
+
+    var p1 = new PolygonObject().initialize(430, 200, 0, [new Point2D().initialize(-50, 100),
+                                                       new Point2D().initialize(-50, -100),
+                                                       new Point2D().initialize(50, 0)], null ,
+                                            "purple", "black");
+
+    var p2 = new PolygonObject().initialize(500, 200, 0, [new Point2D().initialize(-100, -50),
+                                                       new Point2D().initialize(100, -50),
+                                                       new Point2D().initialize(0, 50)], null,
+                                            "red", "black");
+
+    var p3 = new PolygonObject().initialize(600, 200, 0, [new Point2D().initialize(-25, 0),
+                                                       new Point2D().initialize(25, -50),
+                                                       new Point2D().initialize(25, 50)], null,
+                                            "pink", "black");
+
+    var p4 = new PolygonObject().initialize(700, 300, 0, [new Point2D().initialize(25, 25),
+                                                       new Point2D().initialize(-25, 75),
+                                                       new Point2D().initialize(-25, -25),
+                                                       new Point2D().initialize(25, -75)], null,
+                                            "yellow", "black");
+
+    var p5 = new PolygonObject().initialize(550, 300, 0, [new Point2D().initialize(-50, 25),
+                                                       new Point2D().initialize(0, -25),
+                                                       new Point2D().initialize(50, 25)], null,
+                                            "orange", "black");
+
+    var p6 = new PolygonObject().initialize(500, 300, 0, [new Point2D().initialize(-50, 0),
+                                                       new Point2D().initialize(0, -50),
+                                                       new Point2D().initialize(50, 0),
+                                                       new Point2D().initialize(0, 50)], null,
+                                            "green", "black");
+
+    var p7 = new PolygonObject().initialize(550, 300, 0, [new Point2D().initialize(50, 25),
+                                                       new Point2D().initialize(-50, 25),
+                                                       new Point2D().initialize(50, -75)], null,
+                                            "blue", "black");
+
+    var ground = new BoxObject().initialize(500, 550, 0, 1888, 235, "red", "black");
+    var background = new GameObject().initialize(500, 300, 0, 1920, 1200, 0);
+    var player = new BoxObject().initialize(200, 300, 0, 25, 64, "red", "red");
+
+    ComponentUtils.addComponent(ground,  new RigidBodyComponent().initialize(0,0,false,true,0.2));
+    ComponentUtils.removeComponent(ground,  ComponentUtils.getComponent(ground, "BOX_RENDER_COMPONENT"));
+    ComponentUtils.addComponent(player, new RigidBodyComponent().initialize(0,1,true,false,0.2));
+    ComponentUtils.addComponent(player, new MovePlayerComponent().initialize());
+    ComponentUtils.addComponent(player, new AnimationRenderComponent().initialize(
+      AssetStore.getAsset("SPRITE_PLAYER").getAssetInstance(), 13, 21));
+    ComponentUtils.removeComponent(player,  ComponentUtils.getComponent(player, "BOX_RENDER_COMPONENT"));
+    ComponentUtils.getComponent(player, "ANIMATION_RENDER_COMPONENT").play("HORIZONTAL",
+                                                                                 2,
+                                                                                 6,
+                                                                                 6,
+                                                                                 -1,
+                                                                                 150);
+    ComponentUtils.addComponent(p1, new RigidBodyComponent().initialize(0,1,false,false,0.2));
+    ComponentUtils.addComponent(p2, new RigidBodyComponent().initialize(0,1,false,false,0.2));
+    ComponentUtils.addComponent(p3, new RigidBodyComponent().initialize(0,1,false,false,0.2));
+    ComponentUtils.addComponent(p4, new RigidBodyComponent().initialize(0,1,false,false,0.2));
+    ComponentUtils.addComponent(p5, new RigidBodyComponent().initialize(0,1,false,false,0.2));
+    ComponentUtils.addComponent(p6, new RigidBodyComponent().initialize(0,1,false,false,0.2));
+    ComponentUtils.addComponent(p7, new RigidBodyComponent().initialize(0,1,false,false,0.2));
+    ComponentUtils.addComponent(Game,  
+                                new MoveCameraComponent().initialize(65, 68, 87, 83, 33, 34, 72, 75, 20, 0.1, 5));
+    ComponentUtils.addComponent(Game, new FpsMeterComponent().initialize());
+    ComponentUtils.addComponent(background,  
+                                new ImageRenderComponent().initialize(AssetStore.getAsset("BACKGROUND_IMAGE").getAssetInstance(), false, "HORIZONTAL"));
+    ComponentUtils.addComponent(ground,  new ImageRenderComponent().initialize(AssetStore.getAsset("GROUND_IMAGE").getAssetInstance(), true, "HORIZONTAL"));
+
+    var layer = new Layer().initialize();
+    layer.setGravity(0);
+    var layer2 = new Layer().initialize();
+    var scene = new Scene().initialize(-4000, -4000, 4000, 4000);
+
+    layer.addGameObject(ground);
+    layer.addGameObject(player);
+    layer.addGameObject(p1);
+    layer.addGameObject(p2);
+    layer.addGameObject(p3);
+    layer.addGameObject(p4);
+    layer.addGameObject(p5);
+    layer.addGameObject(p6);
+    layer.addGameObject(p7);
+
+    layer2.addGameObject(background);
+
+    scene.addLayer(layer2);
+    scene.addLayer(layer);
+
+    Game.init(document.getElementById("gameCanvas"), scene);
+
+    ComponentUtils.addComponent(Game, new MoveTangramComponent().initialize());
+
+    Game.camera.centerPoint.x = 500;
+    Game.camera.centerPoint.y = 300;
+
+    Game.camera.translate.setTranslate(0, 0);
+    Game.camera.scale.setScale(1, 1);
+    Game.camera.rotate.setRotate(0);
+  }
+  </script>
+
+</head>
+<body onload="buildGame();">
+  <canvas style="border: 1px solid black;" id="gameCanvas" width="1000" height="400"></canvas>
+  <p> - Clicar e segurar mantém um polígono selecionado.</p>
+  <p> - Mover o mouse movimenta o polígono selecionado.</p>
+  <p> - Teclas (+,-) rotacionam o polígono selecionado.</p>
+  <p> - Teclas (A,D,W,S) movimentam a câmera.</p>
+  <p> - Teclas (H, K) rotacionam a câmera.</p>
+  <p> - Teclas (Page Up, Page Down) fazem zoom na câmera.</p>
+  <p> - Tecla  (G) liga/desliga a gravidade da cena.</p>
+</body>
+</html>

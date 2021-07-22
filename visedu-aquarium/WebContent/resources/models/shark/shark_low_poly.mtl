@@ -1,0 +1,35 @@
+# Blender MTL File: 'None'
+# Material Count: 3
+
+newmtl greatwhiteshark
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.462951 0.460205 0.471009
+Ks 0.100000 0.100000 0.100000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd texture\\greatwhiteshark.jpg
+map_Bump texture\\greatwhiteshark_n.jpg
+
+newmtl greatwhiteshark_eye
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.289082 0.301082 0.521925
+Ks 0.100000 0.100000 0.100000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd texture\\greatwhiteshark_Eye.jpg
+map_Bump texture\\greatwhiteshark_Eye_n.jpg
+
+newmtl greatwhiteshark_teet
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.405615 0.570700 0.356973
+Ks 0.100000 0.100000 0.100000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd texture\\greatwhiteshark_teeth.jpg
+map_Bump texture\\greatwhiteshark_teeth_n.jpg

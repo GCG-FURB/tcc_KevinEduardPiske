@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>VisEdu - Aquário Virtual</title>
+		<link rel="shortcut icon" href="resources/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="./game/styles/visedu.css">
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script src='https://code.jquery.com/jquery-2.1.3.js'></script>
+		<script src='https://code.jquery.com/ui/1.11.4/jquery-ui.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r72/three.js'></script>
+		
+		<script src="./engine/lib/prototype-1.6.0.2.js"></script>
+		<script src="./engine/lib/stats.min.js"></script>
+		<script src="./engine/src/physic/box2d/common/b2Settings.js"></script>
+		<script src="./engine/src/physic/box2d/common/math/b2Vec2.js"></script>
+		<script src="./engine/src/physic/box2d/common/math/b2Mat22.js"></script>
+		<script src="./engine/src/physic/box2d/common/math/b2Math.js"></script>
+		<script src="./engine/src/physic/box2d/collision/b2AABB.js"></script>
+		<script src="./engine/src/physic/box2d/collision/b2Bound.js"></script>
+		<script src="./engine/src/physic/box2d/collision/b2BoundValues.js"></script>
+		<script src="./engine/src/physic/box2d/collision/b2Pair.js"></script>
+		<script src="./engine/src/physic/box2d/collision/b2PairCallback.js"></script>
+		<script src="./engine/src/physic/box2d/collision/b2BufferedPair.js"></script>
+		<script src="./engine/src/physic/box2d/collision/b2PairManager.js"></script>
+		<script src="./engine/src/physic/box2d/collision/b2BroadPhase.js"></script>
+		<script src="./engine/src/physic/box2d/collision/b2Collision.js"></script>
+		<script src="./engine/src/physic/box2d/collision/Features.js"></script>
+		<script src="./engine/src/physic/box2d/collision/b2ContactID.js"></script>
+		<script src="./engine/src/physic/box2d/collision/b2ContactPoint.js"></script>
+		<script src="./engine/src/physic/box2d/collision/b2Distance.js"></script>
+		<script src="./engine/src/physic/box2d/collision/b2Manifold.js"></script>
+		<script src="./engine/src/physic/box2d/collision/b2OBB.js"></script>
+		<script src="./engine/src/physic/box2d/collision/b2Proxy.js"></script>
+		<script src="./engine/src/physic/box2d/collision/ClipVertex.js"></script>
+		<script src="./engine/src/physic/box2d/collision/shapes/b2Shape.js"></script>
+		<script src="./engine/src/physic/box2d/collision/shapes/b2ShapeDef.js"></script>
+		<script src="./engine/src/physic/box2d/collision/shapes/b2BoxDef.js"></script>
+		<script src="./engine/src/physic/box2d/collision/shapes/b2CircleDef.js"></script>
+		<script src="./engine/src/physic/box2d/collision/shapes/b2CircleShape.js"></script>
+		<script src="./engine/src/physic/box2d/collision/shapes/b2MassData.js"></script>
+		<script src="./engine/src/physic/box2d/collision/shapes/b2PolyDef.js"></script>
+		<script src="./engine/src/physic/box2d/collision/shapes/b2PolyShape.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/b2Body.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/b2BodyDef.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/b2CollisionFilter.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/b2Island.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/b2TimeStep.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/contacts/b2ContactNode.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/contacts/b2Contact.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/contacts/b2ContactConstraint.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/contacts/b2ContactConstraintPoint.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/contacts/b2ContactRegister.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/contacts/b2ContactSolver.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/contacts/b2CircleContact.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/contacts/b2Conservative.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/contacts/b2NullContact.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/contacts/b2PolyAndCircleContact.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/contacts/b2PolyContact.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/b2ContactManager.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/b2World.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/b2WorldListener.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2JointNode.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2Joint.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2JointDef.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2DistanceJoint.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2DistanceJointDef.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2Jacobian.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2GearJoint.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2GearJointDef.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2MouseJoint.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2MouseJointDef.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2PrismaticJoint.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2PrismaticJointDef.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2PulleyJoint.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2PulleyJointDef.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2RevoluteJoint.js"></script>
+		<script src="./engine/src/physic/box2d/dynamics/joints/b2RevoluteJointDef.js"></script>
+		
+		<script src="./engine/src/utils/ArrayUtils.js"></script>
+		<script src="./engine/src/utils/JSUtils.js"></script>
+		<script src="./engine/src/utils/ComponentUtils.js"></script>
+		<script src="./engine/src/utils/MathUtils.js"></script>
+		<script src="./engine/src/utils/ColorUtils.js"></script>
+		<script src="./engine/src/utils/ThreeUtils.js"></script>
+		<script src="./engine/src/utils/MTLLoader.js"></script>
+		<script src="./engine/src/utils/DDSLoader.js"></script>
+		<script src="./engine/src/utils/OBJMTLLoader.js"></script>
+		<script src="./engine/src/utils/StringUtils.js"></script>
+		
+		<script src="./engine/src/game/AssetStore.js"></script>
+		<script src="./engine/src/game/Asset.js"></script>
+		<script src="./engine/src/game/Game.js"></script>
+		<script src="./engine/src/game/Layer.js"></script>
+		<script src="./engine/src/game/Scene.js"></script>
+		<script src="./engine/src/game/Camera.js"></script>
+		
+		<script src="./engine/src/geometric/Point.js"></script>
+		<script src="./engine/src/geometric/Point2D.js"></script>
+		<script src="./engine/src/geometric/Point3D.js"></script>
+		
+		<script src="./engine/src/gameobject/GameObject.js"></script>
+		<script src="./engine/src/gameobject/PolygonObject.js"></script>
+		<script src="./engine/src/gameobject/BoxObject.js"></script>
+		<script src="./engine/src/gameobject/CircleObject.js"></script>
+		<script src="./engine/src/gameobject/TemplateObject.js"></script>
+		<script src="./engine/src/gameobject/TemplateWithPointsObject.js"></script>
+		
+		<script src="./engine/src/builder/ThreeJSBuilder.js"></script>
+		
+		<script src="./engine/src/gameobject/ObjectFactory.js"></script>
+		<script src="./engine/src/gameobject/canvas/CanvasObjectFactory.js"></script>
+		<script src="./engine/src/gameobject/threeJS/ThreeJSObjectFactory.js"></script>
+		
+		<script src="./engine/src/component/Component.js"></script>
+		<script src="./engine/src/component/RenderableComponent.js"></script>
+		<script src="./engine/src/component/LightComponent.js"></script>
+		<script src="./engine/src/component/TransformationComponent.js"></script>
+		<script src="./engine/src/component/BoxRenderComponent.js"></script>
+		<script src="./engine/src/component/CubeRenderComponent.js"></script>
+		<script src="./engine/src/component/PolygonRenderComponent.js"></script>
+		<script src="./engine/src/component/LinesRenderComponent.js"></script>
+		<script src="./engine/src/component/SpheresRenderComponent.js"></script>
+		<script src="./engine/src/component/CirclesRenderComponent.js"></script>
+		<script src="./engine/src/component/SplineRenderComponent.js"></script>
+		<script src="./engine/src/component/ScaleComponent.js"></script>
+		<script src="./engine/src/component/threeJS/ThreeJSScaleComponent.js"></script>
+		<script src="./engine/src/component/TranslateComponent.js"></script>
+		<script src="./engine/src/component/threeJS/ThreeJSTranslateComponent.js"></script>
+		<script src="./engine/src/component/RotateComponent.js"></script>
+		<script src="./engine/src/component/threeJS/ThreeJSRotateComponent.js"></script>
+		<script src="./engine/src/component/ComponentFactory.js"></script>
+		<script src="./engine/src/component/threeJS/ThreeJSComponentFactory.js"></script>
+		<script src="./engine/src/component/ImageRenderComponent.js"></script>
+		<script src="./engine/src/component/CircleRenderComponent.js"></script>
+		<script src="./engine/src/component/AmbientLightComponent.js"></script>
+		<script src="./engine/src/component/HemisphereLightComponent.js"></script>
+		<script src="./engine/src/component/DirectionalLightComponent.js"></script>
+		<script src="./engine/src/component/PointLightComponent.js"></script>
+		<script src="./engine/src/component/SpotLightComponent.js"></script>
+		<script src="./engine/src/component/AnimationRenderComponent.js"></script>
+		<script src="./engine/src/component/GridRenderComponent.js"></script>
+		<script src="./engine/src/component/AxisRenderComponent.js"></script>
+		<script src="./engine/src/component/CameraComponent.js"></script>
+		<script src="./engine/src/component/GroupComponent.js"></script>
+		<script src="./game/component/FishRenderComponent.js"></script>
+		<script src="./game/component/AquariumRenderComponent.js"></script>
+		<script src="./game/component/PanoramicBackgroundRenderComponent.js"></script>
+		
+		<script src="./engine/src/system/RenderSystem.js"></script>
+		<script src="./engine/src/system/LogicSystem.js"></script>
+		
+		<script src="./engine/src/api/APIHandler.js"></script>
+		<script src="./engine/src/api/ThreeJSHandler.js"></script>
+		
+		<script src='./game/factory/Factory.js'></script>
+		<script src='./game/factory/Factory2D.js'></script>
+		<script src='./game/factory/Factory3D.js'></script>
+		
+		<script src='./game/properties/Property.js'></script>
+		<script src='./game/properties/TextInputProperty.js'></script>
+		<script src='./game/properties/NumberInputProperty.js'></script>
+		<script src='./game/properties/NumberSubProperty.js'></script>
+		<script src='./game/properties/AngleSubProperty.js'></script>
+		<script src='./game/properties/LabelMatrixProperty.js'></script>
+		<script src='./game/properties/PointsNumberInputProperty.js'></script>
+		<script src='./game/properties/FileInputProperty.js'></script>
+		<script src='./game/properties/ColorInputProperty.js'></script>
+		<script src='./game/properties/CheckBoxProperty.js'></script>
+		<script src='./game/properties/ComboBoxProperty.js'></script>
+		<script src='./game/properties/DynamicComboBoxProperty.js'></script>
+		<script src='./game/properties/PointsDynamicComboBoxProperty.js'></script>
+		<script src='./game/properties/PointsLengthProperty.js'></script>
+		<script src='./game/properties/PropertiesController.js'></script>
+		<script src='./game/properties/PropertiesWrapper.js'></script>
+		
+		<script src='./game/dragndrop/DragAndDropController.js'></script>
+		<script src='./game/treebehavior/TreeDNDBehavior.js'></script>
+		<script src='./game/treebehavior/TreePluralDNDBehavior.js'></script>
+		<script src='./game/treebehavior/TreeObjectDNDBehavior.js'></script>
+		<script src='./game/treebehavior/TreeRenderDNDBehavior.js'></script>
+		<script src='./game/treebehavior/TreeAquariumDNDBehavior.js'></script>
+		<script src='./game/dragndrop/DNDBehavior.js'></script>
+		<script src='./game/dragndrop/TemplateDNDBehavior.js'></script>
+		<script src='./game/dragndrop/ElementDNDBehavior.js'></script>
+		
+		<script src='./game/graphicalbehavior/GraphicalBehavior.js'></script>
+		<script src='./game/graphicalbehavior/ElementGraphicalBehavior.js'></script>
+		<script src='./game/graphicalbehavior/GroupGraphicalBehavior.js'></script>
+		
+		<script src='./game/type/Type.js'></script>
+		<script src='./game/type/Types.js'></script>
+		<script src='./game/pieces/Piece.js'></script>
+		<script src='./game/pieces/ConnectorPiece.js'></script>
+		
+		<script src='./game/pieces/PiecesUtils.js'></script>
+		<script src='./game/pieces/SharkPiece.js'></script>
+		<script src='./game/pieces/SardinePiece.js'></script>
+		<script src='./game/pieces/AquariumPiece.js'></script>
+		<script src='./game/pieces/WorldPiece.js'></script>
+		<script src='./game/pieces/ConnectorCrossPiece.js'></script>
+		<script src='./game/pieces/ConnectorArrowPiece.js'></script>
+		<script src='./game/pieces/ConnectorSquarePiece.js'></script>
+		<script src='./game/pieces/ConnectorDiamondPiece.js'></script>
+		
+		<script src='./game/builder/ThreeJSCustomBuilder.js'></script>
+		
+		<script src='./game/gameobject/FishObject.js'></script>
+		<script src='./game/gameobject/AquariumObject.js'></script>
+		
+		<script src='./game/pieces/PiecesController.js'></script>
+		<script src='./game/controls/OrbitControls.js'></script>
+		<script src='./game/controls/TouchControls.js'></script>
+		<script src='./game/engine-custom/ThreeJSCustomHandler.js'></script>
+		<script src='./game/visedu/VisEdu.js'></script>
+		<script>
+		
+			function init() {
+				VisEdu.create($('.world'));
+				var tab = $( ".menu-tabs" );
+				tab.tabs(
+					{
+						activate: function( event, ui ) {
+							onTabChange(ui);
+						}
+					});
+				tab.tabs("option", "active", 0);
+				PiecesController.tab = tab;
+				PiecesController.createPallet($('#pallet-tab'));
+				PiecesController.createTree($('.pieces-tree'));
+				PiecesController.setupDraggables();
+				PropertiesController.bindProperties();
+				setupAjuda();
+			}
+			
+			function setupAjuda() {
+				var tab = $('.ajuda-tabs');
+				tab.tabs();
+				var dialog = $('#dialog-ajuda');
+				dialog.dialog({
+					modal: true,
+				    resizable: false,
+					width: 800,
+					height: 700
+				}).dialog('close');
+				dialog.dialog('option', 'title', 'Ajuda');
+			}
+			
+			function showDialogAjuda() {
+				$('#dialog-ajuda').dialog('open');
+			}
+		
+			function setupDialog() {
+				var dialog = $('#dialogImp');
+				dialog.dialog({
+					modal: true,
+				    resizable: false,
+					width: 800,
+					height: 700,
+					buttons: [
+			          {
+			            text: "Abrir",
+			            click: function() {
+			              $( this ).dialog( "close" );
+			              var txt = $('.source').val();
+			              if (txt) {
+			            	  PiecesUtils.readJSON($('.piece.renderer'), txt);
+			              }
+			            }
+			          }
+					]
+				}).dialog('close');
+			}
+			
+			function showImpDialog() {
+				$('#dialogImp').dialog('open');
+			}
+			
+			function onTabChange(ui) {
+				var id = ui.newPanel.attr('id');
+				switch(id) {
+					case 'propriedades-tab':
+						PropertiesController.setupProperties();
+						break;
+				}
+			}
+			
+		</script>
+	</head>
+	<body onload="init()" oncontextmenu="return false;">
+		<div class='wrapper'>
+			<div class='menu'>		
+				<div class='trashCan'></div>
+				<div class='menu-tabs'>
+				<ul>
+				    <li><a href="#pallet-tab">Fábrica de Peças</a></li>
+				    <li><a href="#propriedades-tab">Propriedades da Peça</a></li>
+				    <li><a href="#ajuda-tab" onclick="showDialogAjuda()">Ajuda</a></li>
+			    </ul>
+					<div id='pallet-tab' class='tab'></div>
+					<div id='propriedades-tab' class='tab'>
+						<div class='property none'>
+							<label class='msg'>Selecione um item</label>
+						</div>
+						<div class='property fishQuantity aquarium'>
+							<label id='msgQuantitySardine'>Quantidade de sardinhas: </label>
+							<label id='quantitySardine'>0</label>
+							<br>
+							<label id='msgQuantityShark'>Quantidade de tubarões: </label>
+							<label id='quantityShark'>0</label>
+							<br>
+							<br>
+							<label id='msgQuantityFish'>Quantidade total de peixes: </label>
+							<label id='quantityFish'>0</label>
+							<br>
+							<br>
+						</div>
+						<div class='property perception aquarium'>
+							<div class='label'>Percepção</div>
+								<input id='check' class='prop-field' type="checkbox" /><span> Habilitar</span>
+						</div>
+						<div class='property vision shark sardine'>
+							<div class='label'>Visão</div>
+								<input id='check' class='prop-field' type="checkbox" /><span> Habilitar</span>
+						</div>
+						<div class='property synchronizedVision shark sardine'>
+							<div class='label'>Visão sincronizada</div>
+								<input id='check' class='prop-field' type="checkbox" /><span> Habilitar</span>
+						</div>
+						<div class='property visionSize shark sardine'>
+							<span>Raio da visão </span><input id='visionRadius' class='prop-field number' type="number" />
+							<span>Alcance da visão </span><input id='visionRange' class='prop-field number' type="number" />
+						</div>
+						<div class='property moveSpeed shark sardine'>
+							<span>Velocidade de movimento </span><input id='moveSpeed' class='prop-field number' type="number" />
+						</div>
+						<div class='property shouldEat shark'>
+							<div class='label'>Comer</div>
+								<input id='check' class='prop-field' type="checkbox" /><span> Habilitar</span>
+						</div>
+						<div class='property multiplier renderer'>
+							<span>Multiplicador de velocidade </span><input id='speedMultiplier' class='prop-field number' type="number" />
+						</div>
+					</div>
+					<div id='ajuda-tab' class='tab'>
+						<div id='dialog-ajuda' class='dialog'>
+							<div class='ajuda-tabs'>
+								<ul>
+									<li><a href="#introducao-ajuda">Introdução</a></li>
+									<li><a href="#dicas-ajuda">Dicas</a></li>
+									<li><a href="#pecas-ajuda">Peças</a></li>
+									<li><a href="#conceitos-ajuda">Conceitos</a></li>							
+									<li><a href="#sobre-ajuda">Sobre</a></li>	
+								</ul>
+								<div id='introducao-ajuda' class=' tab-ajuda'>
+									O <b>VisEdu - Aquário Virtual</b> é uma aplicação didática para auxiliar no ensino de conceitos biológicos relacionados à um aquário marinho. Ele visa a prática dos conceitos aprendidos em sala de aula e não a introdução desses conceitos.
+									<br><br><br>
+									A aplicação é composta por 7 painéis: 
+									<br><br>
+									a) <b>Fábrica de Peças</b>, que armazena as peças suportadas pela aplicação. Cada uma dessas peças representa algo manipulável dentro do aquário virtual;
+									<br><br>
+									b) <b>Árvore de Peças</b>, que representa o mundo virtual em forma de árvore através do encaixe das peças;
+									<br><br>
+									c) <b>Área de Texto</b>, que exibe os comportamentos definidos pelo raciocínio do ser virtual;
+									<br><br>
+									d) <b>Propriedades da Peça</b>, que exibe todas as propriedades manipuláveis pertencentes à peça selecionada, permitindo que o usuário as altere, a fim de modificar o resultado da simulação;
+									<br><br>
+									e) <b>Câmera Principal</b>, que exibe o aquário virtual em três dimensões (3D);
+									<br><br>
+									f) <b>Câmera Secundária</b>, que representa os olhos do ser virtual, exibindo sua visão do ambiente;
+									<br><br>
+									g) <b>Ajuda</b>, que permite a consulta de informações e dicas a respeito da aplicação e seu funcionamento.
+								</div>
+								<div id='dicas-ajuda' class=' tab-ajuda'>
+									- Para selecionar uma peça basta clicar com o botão esquerdo do mouse em cima dela;
+									<br><br>
+									- Para incluir um objeto na simulação, deve-se arrastar sua respectiva peça presente na Fábrica de Peças até o engate compatível na Árvore de Peças;
+									<br><br>
+									- Para remover uma peça da Árvore de Peças, deve-se arrastar ela até ficar sobre a lixeira e em seguida soltar o botão do mouse;
+									<br><br>
+									- Para girar a câmera principal em torno do aquário, deve-se deixar apertado o botão esquerdo do mouse e mexer o mouse;
+									<br><br>
+									- Para se aproximar ou se afastar do aquário, deve-se rolar a rodinha do mouse;
+									<br><br>
+									- Para deslocar a visão da câmera principal, deve-se deixar apertado o botão direito do mouse e mexer o mouse;
+									<br><br>
+									- Para habilitar a câmera secundária e a área de texto, deve-se selecionar algum ser virtual;
+									<br><br>
+									- Para alterar as propriedades numéricas basta digitar o valor e apertar a tecla enter.
+								</div>
+								<div id='pecas-ajuda' class=' tab-ajuda'>
+									MUNDO:
+									<br>
+									Representa o mundo virtual. Ela não está inclusa na Fábrica de Peças e já inicia na Árvore de Peças.
+									<br><br>
+									Propriedades:
+									<br><br>
+									a) Multiplicador de velocidade:
+									<br>
+									Responsável por alterar a velocidade de toda a simulação, isso inclui a velocidade dos peixes, a velocidade das bolhas, o tempo para a procriação, o tempo para a morte por fome e o tempo para atualizar o nível de plâncton na água. É uma propriedade numérica e pode-se colocar valores positivos, negativos, zero e decimais. Os valores negativos irão fazer com que a simulação comece a se movimentar de "ré", enquanto que o valor zero pausa a simulação. OBS: Valores acima de 5 ou abaixo de -5 podem gerar problemas no aquário virtual, pois os seres vivos se movem muito rápido, podendo sair do aquário.
+									<br><br><br>
+									AQUÁRIO:
+									<br>
+									Representa o objeto aquário dentro do mundo virtual.
+									<br><br>
+									Propriedades:
+									<br><br>
+									a) Percepção:
+									<br>
+									Responsável por habilitar e desabilitar a percepção do ambiente ao redor e consequentemente todo o raciocínio que os seres virtuais possuem.
+									<br><br><br>
+									TUBARÃO:
+									<br>
+									Representa um tubarão/predador dentro do aquário virtual.
+									<br><br>
+									Propriedades:
+									<br><br>
+									a) Visão:
+									<br>
+									Habilita ou desabilita o desenho tridimensional de uma forma semelhante a um cone que representa a visão do peixe.
+									<br><br>
+									b) Visão sincronizada:
+									<br>
+									Habilita ou desabilita a visão sincronizada com as propriedades Raio da Visão e Alcance da Visão, gerando a visão real do peixe e permitindo sua alteração.
+									<br><br>
+									c) Raio da visão:
+									<br>
+									Representa a largura do campo e visão.
+									<br><br>
+									d) Alcance da visão:
+									<br>
+									Representa o alcance de visão, ou seja, até onde o peixe vai conseguir ver.
+									<br><br>
+									e) Velocidade de movimento:
+									<br>
+									Representa a velocidade de movimento individual do tubarão e sofre a ação do multiplicador de velocidade da peça mundo.
+									<br><br>
+									f) Comer:
+									<br>
+									Indica se o tubarão deve comer sardinhas, caso não, ele somente as perseguirá.
+									<br><br><br>
+									SARDINHA:
+									<br>
+									Representa uma sardinha/presa dentro do aquário virtual.
+									<br><br>
+									Propriedades:
+									<br><br>
+									a) Visão;
+									<br>
+									b) Visão sincronizada;
+									<br>
+									c) Raio da visão;
+									<br>
+									d) Alcance da visão;
+									<br>
+									e) Velocidade de movimento.
+									<br><br>
+									Ambas funcionam da mesma forma que as propriedades da peça Tubarão descritas a cima.
+								</div>
+								<div id='conceitos-ajuda' class=' tab-ajuda'>
+									BIOLOGIA:
+									<br>
+									É uma ciência natural, cujo objeto de estudo é a origem, a evolução e as propriedades dos seres vivos. Ela estuda as características e comportamentos tanto dos organismos individuais como das espécies no seu conjunto, assim como a reprodução dos seres vivos e as interações entre eles e o ambiente a seu redor.
+									<br>
+									Fonte: http://conceito.de/biologia
+									<br><br>
+									ECOSSISTEMA:
+									<br>
+									É um sistema biológico formado por dois elementos indissociáveis, a biocenose e o biótopo. Dos quais a biocenose é o conjunto de seres vivos que convivem entre si e o biótopo é o meio que gera recursos para prover e dar manutenção à vida desses seres.
+									<br>
+									Fonte: DAJOZ, Roger. Princípios de ecologia. 7. Ed. Porto Alegre: Artmed, 2005.
+									<br><br>
+								</div>
+								<div id='sobre-ajuda' class='tab-ajuda'>
+									<b>VisEdu - Aquário Virtual: simulador de ecossistema utilizando animação comportamental</b>  
+									<br><br>
+									Acadêmico: Kevin Eduard Piske
+									<br>
+									Orientador: Dalton Solano dos Reis
+									<br><br>
+									Grupo de Pesquisa em Computação Gráfica, Processamento de Imagens e Entretenimento Digital - GCG
+									<br>
+									Universidade Regional de Blumenau - FURB
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class='pieces-canvas'>
+					<div class='pieces-tree'></div>
+				</div>
+				<div class='textarea-canvas'>
+					<textarea id='messages-area' class='textarea' readonly>
+					</textarea>
+				</div>
+			</div>
+			<div class='world'>
+			</div>
+		</div>
+	</body>
+</html>

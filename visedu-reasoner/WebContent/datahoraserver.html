@@ -1,0 +1,72 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+		<title>Data Hora Server</title> 
+		<style type="text/css"> 
+			p { 
+				margin: 0; 
+			} 
+			#messageArea { 
+				width: 500px; 
+				height: 200px; 
+				overflow: auto; 
+				border: 1px solid black; 
+			} 
+			#iptMessage { 
+				width: 240px; 
+			} 
+		</style> 
+	</head> 
+	<body> 
+		<div id="messageArea"></div> 
+		<div> 
+			<form onsubmit="return false;"> 
+				<input id="iptMessage" name="message" /> 
+				<button id="btnEnviar">Enviar</button> 
+			</form> 
+		</div> 
+		<script type="text/javascript"> 
+			function log(msg) { 
+				if (typeof console !== "undefined") 
+					console.log(msg); 
+			} 			
+			if ('WebSocket' in window || 'MozWebSocket' in window) { 
+				var websocket = new WebSocket("ws://campeche.inf.furb.br:8094/lotkaVolterraWeb/server"); 
+				//var websocket = new WebSocket("ws://localhost:8081/visedu-reasoner/server");
+			} else { 
+				alert("Browser não suporta WebSocket"); 
+			} 
+			if (websocket != undefined) { 
+				websocket.onopen = function() { 
+					log("onopen"); 
+				}; 
+				websocket.onclose = function() { 
+					log("onclose"); 
+					alert("Desconectou"); 
+				}; 
+				websocket.onerror = function() { 
+					log("onerror"); 
+				}; 
+				websocket.onmessage = function(data) { 
+					log("onmessage: " + data.data); 
+					var message = "<p>[ret] " + data.data + "</p>"; 
+					var messageArea = document.getElementById("messageArea"); 
+					messageArea.innerHTML += message; messageArea.scrollTop = messageArea.scrollHeight; 
+				}; 
+				function sendMessage(msg) { 
+					log("Enviar mensagem (" + msg + ")"); 
+					websocket.send(msg); 
+				} 
+				document.getElementById("btnEnviar").onclick = function() {
+					var input = document.getElementById("iptMessage");
+					sendMessage(input.value);
+					var messageArea = document.getElementById("messageArea"); 
+					messageArea.innerHTML += "[cmd] " + input.value + "<br />"; messageArea.scrollTop = messageArea.scrollHeight; 
+					input.value = ""; 
+					return false; 
+				}; 
+			} 
+		</script> 
+	</body> 
+</html>
+

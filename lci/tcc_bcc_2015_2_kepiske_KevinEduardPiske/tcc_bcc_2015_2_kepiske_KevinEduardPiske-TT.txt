@@ -1,0 +1,5 @@
+Para executar o Aquário Virtual sem o Reasoner basta executar o arquivo index.html do projeto visedu-aquarium.
+OBS: Necessita de conexão com a internet, pois importa-se o JQuery e o ThreeJS remotamente.
+
+Para executar o Aquário Virtual com o Reasoner, deve-se colocar o projeto visedu-reasoner para ser executado através de um servidor Tomcat 7.
+OBS: No projeto visedu-aquarium implementou-se uma forma de pegar automaticamente o endereço do servidor mais o caminho do servlet do Reasoner, porém em alguns casos o caminho completo não é encontrado. Nesse caso deve-se abrir a classe visedu-aquarium/game/visedu/VisEdu.js, procurar a função create e modificar a URI passada por parâmetro para a função createWebsocket. Caso tudo ocorrer bem, o console do navegador exibirá uma mensagem informando que a conexão foi estabelecida e o tempo que levou.
